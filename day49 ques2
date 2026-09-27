@@ -1,0 +1,41 @@
+//Q98: Print initials of a name with the surname displayed in full.
+
+#include <stdio.h>
+
+int main()
+{
+    char name[100];
+    int i, last = 0;
+
+    fgets(name, sizeof(name), stdin);
+
+    /* Find the starting position of the surname */
+    for (i = 0; name[i] != '\0' && name[i] != '\n'; i++)
+    {
+        if (name[i] == ' ' && name[i + 1] != ' ')
+        {
+            last = i + 1;
+        }
+    }
+
+    /* Print initials before surname */
+    printf("%c.", name[0]);
+
+    for (i = 1; i < last; i++)
+    {
+        if (name[i - 1] == ' ' && name[i] != ' ' && i != last)
+        {
+            printf("%c.", name[i]);
+        }
+    }
+
+    printf(" ");
+
+    /* Print surname in full */
+    for (i = last; name[i] != '\0' && name[i] != '\n'; i++)
+    {
+        printf("%c", name[i]);
+    }
+
+    return 0;
+}
